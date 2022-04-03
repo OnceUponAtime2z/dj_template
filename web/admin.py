@@ -1,17 +1,18 @@
 from django.contrib import admin
-from web.models import Blog, Author
+from web.models import Reporter, Article
 
-# Register your models here.
-# admin.site.register(Blog)
-# admin.site.register(Author)
+@admin.register(Reporter)
+class ReporterAdmin(admin.ModelAdmin):
+    list_display = ['email', 'first_name', 'last_name']
 
-@admin.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'date_created']
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['head_line', 'pub_date', 'reporter']
+    
 
-@admin.register(Author)
-class AuthorAdmin(admin.ModelAdmin):
-    list_display = ['prefix', 'first_name', 'last_name', 'dateofbirth']
+
+    
+
 
     
 
