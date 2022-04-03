@@ -1,20 +1,24 @@
-from multiprocessing import context
-from django.shortcuts import render, HttpResponse
-from web.models import Article
+from web.models import Subject
+from django.shortcuts import render
 
 
 # Create your views here.
 def index(request):
     context = {}
-    article_q = Article.objects.all()
+    context['subjects'] = Subject.objects.all()
+    return render(request, "index.html", context)
 
-    context['articles'] = article_q
+def detail(request, id):
+    context = {}
+    subjects = Subject.objects.filter(id=id)
+    for subject in subjects:
+        context['subject'] = subject
+    return render(request, "detail.html")
 
-    return render(request, 'index.html', context)
+def about(request):
+    return render(request, "about.html")
 
-def About(request):
-    return render(request, 'about.html')
+def contact(request):
+    return render(request, "contact.html")
 
-def Contact(request):
-    return render(request, 'contact.html')
 
